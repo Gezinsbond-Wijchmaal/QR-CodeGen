@@ -1,2 +1,2 @@
 # QR-CodeGen
-QR-Code Generqtor in Python
+QR-Code Generator in Python
