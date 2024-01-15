@@ -55,7 +55,11 @@ while True:
     frame= add_corners(frame,45)
     Subtext= values['Subtekst']
 
-    fontie= ImageFont.truetype('SourceSansPro-Bold.ttf', 120)
+<<<<<<< Updated upstream
+    fontie= ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', 120)
+=======
+    fontie= ImageFont.truetype('fonts/SourceSansPro-Bold.ttf', 120)
+>>>>>>> Stashed changes
     fonts= fontie
     
     # Bereken de verhouding tussen de breedte van de tekst en de breedte van de image
@@ -67,7 +71,11 @@ while True:
         # Bereken de nieuwe font size door de oude te vermenigvuldigen met de omgekeerde verhouding
         new_font_sizex = int(fonts.size * max_ratiox / ratiox)
         # Maak een nieuw font object met de nieuwe font size
-        fonts = ImageFont.truetype('SourceSansPro-Bold.ttf', new_font_sizex)
+<<<<<<< Updated upstream
+        fonts = ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', new_font_sizex)
+=======
+        fonts = ImageFont.truetype('fonts/SourceSansPro-Bold.ttf', new_font_sizex)
+>>>>>>> Stashed changes
     
 
     draw.text((32,609), "Gezinsbond",font=fontie, fill=(255,255,255))
@@ -83,9 +91,13 @@ while True:
     afdeling = 'Wijchmaal'
     print(afdeling)
     
-    gbz = Image.open('GB.png').crop(None)
+    gbz = Image.open('pics/GB.png').crop(None)
     drawtje=ImageDraw.Draw(gbz)
-    fontie= ImageFont.truetype('SourceSansPro-Bold.ttf', 120)
+<<<<<<< Updated upstream
+    fontie= ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', 120)
+=======
+    fontie= ImageFont.truetype('fonts/SourceSansPro-Bold.ttf', 120)
+>>>>>>> Stashed changes
     fontje= fontie
     
     # Bereken de verhouding tussen de breedte van de tekst en de breedte van de image
@@ -97,7 +109,11 @@ while True:
         # Bereken de nieuwe font size door de oude te vermenigvuldigen met de omgekeerde verhouding
         new_font_sizej = int(fontje.size * max_ratioj / ratioj)
         # Maak een nieuw font object met de nieuwe font size
-        fontje = ImageFont.truetype('SourceSansPro-Bold.ttf', new_font_sizej)
+<<<<<<< Updated upstream
+        fontje = ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', new_font_sizej)
+=======
+        fontje = ImageFont.truetype('fonts/SourceSansPro-Bold.ttf', new_font_sizej)
+>>>>>>> Stashed changes
     # Gebruik de textlength methode om de breedte van de tekst te krijgen
     text_w = drawtje.textlength(afdeling, font=fontje)
     # Gebruik de textsize attribuut van het font object om de hoogte van de tekst te krijgen
@@ -112,9 +128,8 @@ while True:
     print(url)
 
     word = values['Bestand']
-    mapje = values['Mapje']
     filename = f"{word}.png"
-    bestand = os.path.join(mapje, filename)
+    bestand = os.path.join("c:/pi/gezinsbond", filename)
     print(bestand)
 
     qrtje = qrcode.QRCode(
