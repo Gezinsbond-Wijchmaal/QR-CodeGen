@@ -15,14 +15,14 @@ layout = [  [gbw.Text('Selecteer de map waar het moet opgeslagen worden')],
             [gbw.Text('Vul hier de naam van het bestand in (in 1 woord)')],
             [gbw.InputText(key='Bestand')],
             [gbw.Text('Wat is de naam van de afdeling?')],
-            [gbw.InputText(key='Afdeling')],
+            [gbw.InputText(key='Afdeling', default_text='Wijchmaal')],
             [gbw.Text('Welke tekst wil je onder Gezinsbond hebben staan onder de QR-Code?')],
             [gbw.InputText(key='Subtekst')],
             [gbw.Checkbox(key='geenpopup', text='Geen popup na aanmaken van het bestand', default=False)],
             [gbw.Button('Ok'), gbw.Button('Sluiten')] ]
 
 # Create the Window
-window = gbw.Window('QR code generator', layout)
+window = gbw.Window('QR code generator', layout, no_titlebar=True, grab_anywhere=True)
 # Event Loop to process "events" and get the "values" of the inputs
 while True:
     event, values = window.read()
