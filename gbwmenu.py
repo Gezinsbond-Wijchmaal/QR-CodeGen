@@ -32,7 +32,7 @@ layout = [
 ]
 
 # Maak het Window
-window = sg.Window('Gezinsbod Wijchmaal Selecteerder', layout, size=(600, 200))
+window = sg.Window('Gezinsbond Wijchmaal Selecteerder', layout, size=(600, 200))
 
 # Event Loop
 while True:
