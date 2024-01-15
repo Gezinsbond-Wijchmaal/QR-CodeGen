@@ -11,22 +11,31 @@ layout =    [   [start.Text('Welkom bij de Gezinsbondtool')],
 window = start.Window('Gezinsbondtool', layout, grab_anywhere=True)
 
 while True:
-    event, values = window.read()
-    if event == start.WIN_CLOSED or event == 'Sluiten': # if user closes window or clicks cancel
-        break
-# Check voor 'Ja' keuze
-    if values['JA']:
-        # Popup voor wachtwoord
-        password = start.popup_get_text("Voer het wachtwoord in:", password_char='*')
-        if password == "GbW2023":
-            start.popup("Geslaagd!")
-            subprocess.run(["python", "qrgbw.py"])
-        else:
-            start.popup("Verkeerd wachtwoord.")
-            # Voeg hier de code toe om het 'QR-gewoon' script te starten
-    if values['NEE']:
-        # Voeg hier de code toe om het 'QR-gewoon' script te starten
-        start.popup("Je hebt geen toegang tot deze tool.")
-        break
+    try:
+        event, values = window.read()
+        if event == start.WIN_CLOSED or event == 'Sluiten':
+            break
+
+        if values['JA']:
+            password = start.popup_get_text("Voer het wachtwoord in:", password_char='*')
+            if password == "GbW2023":
+                start.popup("Geslaagd!")
+                try:
+                    subprocess.run(["python", "gbwmenu.py"])
+                except Exception as e:
+                    start.popup(f"Er is een fout opgetreden bij het starten van qrgbw.py: {e}")
+            else:
+                start.popup("Verkeerd wachtwoord.")
+                try:
+                    subprocess.run(["python", "qrgb.py"])
+                except Exception as e:
+                    start.popup(f"Er is een fout opgetreden bij het starten van qrgbw.py: {e}")
+
+        if values['NEE']:
+            start.popup("Je hebt geen toegang tot deze tool.")
+            break
+
+    except Exception as e:
+        start.popup(f"Een onverwachte fout is opgetreden: {e}")
 
 window.close()
