@@ -57,7 +57,7 @@ while True:
     frame= add_corners(frame,45)
     Subtext= values['Subtekst']
 
-    fontie= ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', 120)
+    fontie= ImageFont.truetype('SourceSansPro-Bold.ttf', 120)
     fonts= fontie
     
     # Bereken de verhouding tussen de breedte van de tekst en de breedte van de image
@@ -69,7 +69,7 @@ while True:
         # Bereken de nieuwe font size door de oude te vermenigvuldigen met de omgekeerde verhouding
         new_font_sizex = int(fonts.size * max_ratiox / ratiox)
         # Maak een nieuw font object met de nieuwe font size
-        fonts = ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', new_font_sizex)
+        fonts = ImageFont.truetype('SourceSansPro-Bold.ttf', new_font_sizex)
     
 
     draw.text((32,609), "Gezinsbond",font=fontie, fill=(255,255,255))
@@ -87,7 +87,7 @@ while True:
     
     gbz = Image.open('c:/pi/GB.png').crop(None)
     drawtje=ImageDraw.Draw(gbz)
-    fontie= ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', 120)
+    fontie= ImageFont.truetype('SourceSansPro-Bold.ttf', 120)
     fontje= fontie
     
     # Bereken de verhouding tussen de breedte van de tekst en de breedte van de image
@@ -99,7 +99,7 @@ while True:
         # Bereken de nieuwe font size door de oude te vermenigvuldigen met de omgekeerde verhouding
         new_font_sizej = int(fontje.size * max_ratioj / ratioj)
         # Maak een nieuw font object met de nieuwe font size
-        fontje = ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', new_font_sizej)
+        fontje = ImageFont.truetype('SourceSansPro-Bold.ttf', new_font_sizej)
     # Gebruik de textlength methode om de breedte van de tekst te krijgen
     text_w = drawtje.textlength(afdeling, font=fontje)
     # Gebruik de textsize attribuut van het font object om de hoogte van de tekst te krijgen
@@ -114,8 +114,9 @@ while True:
     print(url)
 
     word = values['Bestand']
+    mapje = values['Mapje']
     filename = f"{word}.png"
-    bestand = os.path.join("c:/pi/gezinsbond", filename)
+    bestand = os.path.join(mapje, filename)
     print(bestand)
 
     qrtje = qrcode.QRCode(
