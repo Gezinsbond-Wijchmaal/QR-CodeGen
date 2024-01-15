@@ -7,7 +7,7 @@ def start_qr_generator():
     pass
 
 def start_countdown_timer():
-    # Code of commando om de aftelklok te starten
+    subprocess.run(["python", "aftelklok.py"])
     # Voorbeeld: subprocess.run(["python", "countdown_timer.py"])
     pass
 
@@ -31,7 +31,7 @@ layout = [
 ]
 
 # Maak het Window
-window = sg.Window('Gezinsbod Wijchmaal Selecteerder', layout, size=(600, 200))
+window = sg.Window('Gezinsbond Wijchmaal Selecteerder', layout, size=(600, 200))
 
 # Event Loop
 while True:
