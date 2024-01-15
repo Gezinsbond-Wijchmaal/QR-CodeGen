@@ -91,7 +91,7 @@ while True:
     fontjegbw= fontiegbw
     
     # Bereken de verhouding tussen de breedte van de tekst en de breedte van de image
-    ratiojgbw = drawtjegbw.textlength(afdelinggbw, fontgbw=fontjegbw) / gbzgbw.size[0]
+    ratiojgbw = drawtjegbw.textlength(afdelinggbw, font=fontjegbw) / gbzgbw.size[0]
     # Stel een maximale verhouding in, bijvoorbeeld 0.8
     max_ratiojgbw = 0.8
     # Als de verhouding groter is dan de maximale verhouding, verklein dan de font size
