@@ -1,4 +1,4 @@
-import PySimpleGUI as gbw
+import PySimpleGUI as gb
 import qrcode
 import PIL
 import os
@@ -6,25 +6,27 @@ from PIL import Image, ImageDraw, ImageFont
 from tkinter import messagebox
 import os.path
 
-gbw.theme('Black')   # Add a touch of color
+gb.theme('Black')   # Add a touch of color
 # All the stuff inside your window.
-layout = [  [gbw.Text('Selecteer de map waar het moet opgeslagen worden')],
-            [gbw.In(key='Mapje'), gbw.FolderBrowse()],
-            [gbw.Text('Vul hier de URL in')],
-            [gbw.InputText(key='URL')],
-            [gbw.Text('Vul hier de naam van het bestand in (in 1 woord)')],
-            [gbw.InputText(key='Bestand')],
-            [gbw.Text('Welke tekst wil je onder Gezinsbond hebben staan onder de QR-Code?')],
-            [gbw.InputText(key='Subtekst')],
-            [gbw.Checkbox(key='geenpopup', text='Geen popup na aanmaken van het bestand', default=False)],
-            [gbw.Button('Ok'), gbw.Button('Sluiten')] ]
+layout = [  [gb.Text('Selecteer de map waar het moet opgeslagen worden')],
+            [gb.In(key='Mapje'), gb.FolderBrowse()],
+            [gb.Text('Vul hier de URL in')],
+            [gb.InputText(key='URL')],
+            [gb.Text('Vul hier de naam van het bestand in (in 1 woord)')],
+            [gb.InputText(key='Bestand')],
+            [gb.Text('Wat is de naam van de afdeling?')],
+            [gb.InputText(key='Afdeling')],
+            [gb.Text('Welke tekst wil je onder Gezinsbond hebben staan onder de QR-Code?')],
+            [gb.InputText(key='Subtekst')],
+            [gb.Checkbox(key='geenpopup', text='Geen popup na aanmaken van het bestand', default=False)],
+            [gb.Button('Ok'), gb.Button('Sluiten')] ]
 
 # Create the Window
-window = gbw.Window('QR code generator', layout, grab_anywhere=True)
+window = gb.Window('QR code generator', layout, grab_anywhere=True)
 # Event Loop to process "events" and get the "values" of the inputs
 while True:
     event, values = window.read()
-    if event == gbw.WIN_CLOSED or event == 'Sluiten': # if user closes window or clicks cancel
+    if event == gb.WIN_CLOSED or event == 'Sluiten': # if user closes window or clicks cancel
         break
     print(values['URL'])
     print(values['Bestand'])
@@ -80,7 +82,7 @@ while True:
 
     frametje = frame
 
-    afdeling = 'Wijchmaal'
+    afdeling = values['Afdeling']
     print(afdeling)
     
     gbz = Image.open('c:/pi/GB.png').crop(None)
