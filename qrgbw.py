@@ -22,7 +22,7 @@ layout = [  [gbw.Text('Selecteer de map waar het moet opgeslagen worden')],
             [gbw.Button('Ok'), gbw.Button('Sluiten')] ]
 
 # Create the Window
-window = gbw.Window('QR code generator', layout, no_titlebar=True, grab_anywhere=True)
+window = gbw.Window('QR code generator', layout, grab_anywhere=True)
 # Event Loop to process "events" and get the "values" of the inputs
 while True:
     event, values = window.read()

@@ -8,7 +8,7 @@ layout =    [   [start.Text('Welkom bij de Gezinsbondtool')],
                 [start.Radio('Ja','SR1', key='JA'), start.Radio('Nee','SR1', default=True, key='NEE')],
                 [start.Button('Ok'), start.Button('Sluiten')]
             ]
-window = start.Window('Gezinsbondtool', layout, no_titlebar=True, grab_anywhere=True)
+window = start.Window('Gezinsbondtool', layout, grab_anywhere=True)
 
 while True:
     event, values = window.read()
