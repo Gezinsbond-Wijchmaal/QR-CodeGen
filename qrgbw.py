@@ -83,7 +83,7 @@ while True:
     afdeling = 'Wijchmaal'
     print(afdeling)
     
-    gbz = Image.open('c:/pi/GB.png').crop(None)
+    gbz = Image.open('GB.png').crop(None)
     drawtje=ImageDraw.Draw(gbz)
     fontie= ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', 120)
     fontje= fontie
