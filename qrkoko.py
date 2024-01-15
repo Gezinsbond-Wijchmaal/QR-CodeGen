@@ -57,7 +57,7 @@ while True:
     framegbw= add_corners(framegbw,45)
     Subtextgbw= values['Subtekstgbw']
 
-    fontiegbw= ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', 120)
+    fontiegbw= ImageFont.truetype('SourceSansPro-Bold.ttf', 120)
     fontsgbw= fontiegbw
     
     # Bereken de verhouding tussen de breedte van de tekst en de breedte van de image
@@ -69,7 +69,7 @@ while True:
         # Bereken de nieuwe font size door de oude te vermenigvuldigen met de omgekeerde verhouding
         new_font_sizexgbw = int(fontsgbw.size * max_ratioxgbw / ratioxgbw)
         # Maak een nieuw font object met de nieuwe font size
-        fontsgbw = ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', new_font_sizexgbw)
+        fontsgbw = ImageFont.truetype('SourceSansPro-Bold.ttf', new_font_sizexgbw)
     
 
     drawgbw.text((32,609), "Gezinsbond",font=fontiegbw, fill=(255,255,255))
@@ -85,9 +85,9 @@ while True:
     afdelinggbw = values['Afdelinggbw']
     print(afdelinggbw)
     
-    gbzgbw = Image.open('c:/pi/GB.png').crop(None)
+    gbzgbw = Image.open('GB.png').crop(None)
     drawtjegbw=ImageDraw.Draw(gbzgbw)
-    fontiegbw= ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', 120)
+    fontiegbw= ImageFont.truetype('SourceSansPro-Bold.ttf', 120)
     fontjegbw= fontiegbw
     
     # Bereken de verhouding tussen de breedte van de tekst en de breedte van de image
@@ -99,7 +99,7 @@ while True:
         # Bereken de nieuwe font size door de oude te vermenigvuldigen met de omgekeerde verhouding
         new_font_sizejgbw = int(fontjegbw.size * max_ratiojgbw / ratiojgbw)
         # Maak een nieuw font object met de nieuwe font size
-        fontjegbw = ImageFont.truetype('c:/pi/gezinsbond/SourceSansPro-Bold.ttf', new_font_sizejgbw)
+        fontjegbw = ImageFont.truetype('SourceSansPro-Bold.ttf', new_font_sizejgbw)
     # Gebruik de textlength methode om de breedte van de tekst te krijgen
     text_wgbw = drawtjegbw.textlength(afdelinggbw, font=fontjegbw)
     # Gebruik de textsize attribuut van het font object om de hoogte van de tekst te krijgen
