@@ -6,7 +6,7 @@ from PIL import Image
 
 def show_countdown_window(hrs, mins, secs):
     # Afmetingen van de afbeelding bepalen
-    img = Image.open('GB_Transparant.png')
+    img = Image.open('pics/GB_Transparant.png')
     img_width, img_height = img.size
 
     # Maak een graph element met dezelfde afmetingen als de afbeelding
@@ -27,7 +27,7 @@ def show_countdown_window(hrs, mins, secs):
 
     # Voeg de afbeelding en tekst toe aan het graph element
     graph = window['-GRAPH-']
-    graph.draw_image('GB_Transparant.png', location=(0, img_height))
+    graph.draw_image('pics/GB_Transparant.png', location=(0, img_height))
     text_location = (img_width // 2, img_height // 2)
     font = ('Helvetica', 300, 'bold')
     text_id = graph.draw_text(f'{hrs:02d}:{mins:02d}:{secs:02d}', text_location, font=font, color='#FFFFFF', text_location='center')
@@ -50,7 +50,7 @@ def countdown_timer(hrs, mins, secs, window, graph, text_id):
         text_location = (img_width // 2, img_height // 2)
         text_id = graph.draw_text(f'{hrs:02d}:{mins:02d}:{secs:02d}', text_location, font=font, color='#FFFFFF', text_location='center')
 
-    playsound('Horn.wav')
+    playsound('sounds/Horn.wav')
     window.close()
 
 
