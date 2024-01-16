@@ -83,5 +83,8 @@
         "xsgbw",
         "ygbw",
         "ysgbw"
+    ],
+    "githubPullRequests.ignoredPullRequestBranches": [
+        "main"
     ]
 }
