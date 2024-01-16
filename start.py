@@ -32,7 +32,10 @@ while True:
                     start.popup(f"Er is een fout opgetreden bij het starten van qrgbw.py: {e}")
 
         if values['NEE']:
-            start.popup("Je hebt geen toegang tot deze tool.")
+            try:
+                subprocess.run(["python", "qrgb.py"])
+            except Exception as e:
+                start.popup("Je hebt geen toegang tot deze tool.")
             break
 
     except Exception as e:
