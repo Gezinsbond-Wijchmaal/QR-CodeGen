@@ -112,8 +112,9 @@ while True:
     print(url)
 
     word = values['Bestand']
+    mapje = values['Mapje']
     filename = f"{word}.png"
-    bestand = os.path.join("c:/pi/gezinsbond", filename)
+    bestand = os.path.join(mapje, filename)
     print(bestand)
 
     qrtje = qrcode.QRCode(
