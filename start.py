@@ -1,14 +1,32 @@
 import PySimpleGUI as start
+#from PIL import ImageFont
 import subprocess
+from PIL import ImageFont
 
 start.theme('Black')
-layout =    [   [start.Text('Welkom bij de Gezinsbondtool')],
-                [start.Text("Deze tool is gemaakt voor de Gezinsbond.")],
-                [start.Text("Ben jij een bestuurslid/medewerker van Gezinsbond Wijchmaal?")],
-                [start.Radio('Ja','SR1', key='JA'), start.Radio('Nee','SR1', default=True, key='NEE')],
-                [start.Button('Ok'), start.Button('Sluiten')]
+
+# Voeg hier het pad naar uw lettertypebestand toe
+font_path = 'fonts/SourceSansPro-Bold.ttf'
+font_size = 16
+
+# Controleer of het lettertype bestaat
+try:
+    font = ImageFont.truetype(font_path, font_size)
+except IOError:
+    start.popup_error('Lettertypebestand niet gevonden!')
+    raise SystemExit('Lettertypebestand niet gevonden!')
+
+# Gebruik de font tuple in uw layout
+layout =    [   
+                [start.Text('Welkom bij de Gezinsbondtool', font=(font_path, font_size))],
+                [start.Text("Deze tool is gemaakt voor de Gezinsbond.", font=(font_path, font_size))],
+                [start.Text("Ben jij een bestuurslid/medewerker van Gezinsbond Wijchmaal?", font=(font_path, font_size))],
+                [start.Radio('Ja', 'SR1', key='JA', font=(font_path, font_size)), start.Radio('Nee', 'SR1', default=True, key='NEE', font=(font_path, font_size))],
+                [start.Button('Ok', font=(font_path, font_size)), start.Button('Sluiten', font=(font_path, font_size))]
             ]
+
 window = start.Window('Gezinsbondtool', layout, grab_anywhere=True)
+
 
 while True:
     try:
