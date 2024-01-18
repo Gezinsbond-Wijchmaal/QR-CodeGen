@@ -2,7 +2,15 @@ import sys
 from cx_Freeze import setup, Executable
 
 # Voeg extra bestanden toe
-files = ['pics', 'fonts', 'sounds']  # Voeg de paden naar uw bronmappen hier toe
+files = [
+    'pics',  # map met uw afbeeldingen
+    'fonts',  # map met uw font
+    'sounds',  # map met uw geluiden
+    'qrgbw.py',  # Python script
+    'qrgb.py',  # Python script
+    'aftelklok.py',  # Python script
+    'gbwmenu.py'  # Python script
+]
 
 base = None
 if sys.platform == 'win32':
@@ -13,9 +21,9 @@ executables = [
 ]
 
 setup(
-    name = 'GezinsbondTool',
-    version = '1.0.0.1',
-    description = 'Gezinsbond Tool Selecteerder',
+    name='Gezinsbond Tool Selecteerder',
+    version='0.1',
+    description='Selecteerder voor de Gezinsbond Tool',
     options = {'build_exe': {'include_files': files}},
     executables = executables
 )
