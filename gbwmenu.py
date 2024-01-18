@@ -2,6 +2,29 @@ import PySimpleGUI as sg
 import subprocess
 from PIL import ImageFont
 
+# Definieer eigen thema
+def create_custom_theme():
+    Gezinsbond = {
+        'BACKGROUND': 'black',
+        'TEXT': green_hex,
+        'INPUT': green_hex,
+        'TEXT_INPUT': green_hex,
+        'SCROLL': green_hex,
+        'BUTTON': ('white', green_hex),
+        'PROGRESS': ('#01826B', '#D0D0D0'),
+        'BORDER': 1, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0,
+    }
+    sg.theme_add_new('MyCustomTheme', Gezinsbond)
+
+# RGB naar hexadecimaal
+def rgb_to_hex(rgb):
+    return '#%02x%02x%02x' % rgb
+green_hex = rgb_to_hex((0, 152, 68))
+
+# Creëer en gebruik aangepast thema
+create_custom_theme()
+sg.theme('Gezinsbond')
+
 # Functies voor het starten van je tools
 def start_qr_generator():
     subprocess.run(["python", "qrgbw.py"])
@@ -30,7 +53,7 @@ except IOError:
     raise SystemExit('Lettertypebestand niet gevonden!')
 
 # Definieer het thema en de layout
-sg.theme('Black')
+sg.theme('Gezinsbond')
 
 # Aangepaste fontinstellingen voor knoppen
 button_font = (font_path, font_size, 'bold')  # Verwijder de tekstkleur

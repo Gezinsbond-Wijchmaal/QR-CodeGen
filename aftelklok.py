@@ -4,7 +4,28 @@ import threading
 from playsound import playsound
 from PIL import Image, ImageFont
 
-sg.theme('Black')
+# Definieer eigen thema
+def create_custom_theme():
+    Gezinsbond = {
+        'BACKGROUND': 'black',
+        'TEXT': green_hex,
+        'INPUT': green_hex,
+        'TEXT_INPUT': green_hex,
+        'SCROLL': green_hex,
+        'BUTTON': ('white', green_hex),
+        'PROGRESS': ('#01826B', '#D0D0D0'),
+        'BORDER': 1, 'SLIDER_DEPTH': 0, 'PROGRESS_DEPTH': 0,
+    }
+    sg.theme_add_new('MyCustomTheme', Gezinsbond)
+
+# RGB naar hexadecimaal
+def rgb_to_hex(rgb):
+    return '#%02x%02x%02x' % rgb
+green_hex = rgb_to_hex((0, 152, 68))
+
+# Creëer en gebruik aangepast thema
+create_custom_theme()
+sg.theme('Gezinsbond')
 
 # Lettertype en grootte
 font_path = 'fonts/SourceSansPro-Bold.ttf'
