@@ -1,25 +1,30 @@
 import PySimpleGUI as gbw
 import qrcode
 import PIL
-import os
 from PIL import Image, ImageDraw, ImageFont
-from tkinter import messagebox
 import os.path
 
-gbw.theme('Black')   # Add a touch of color
-# All the stuff inside your window.
-layout = [  [gbw.Text('Selecteer de map waar het moet opgeslagen worden')],
-            [gbw.In(key='Mapje'), gbw.FolderBrowse()],
-            [gbw.Text('Vul hier de URL in')],
-            [gbw.InputText(key='URL')],
-            [gbw.Text('Vul hier de naam van het bestand in (in 1 woord)')],
-            [gbw.InputText(key='Bestand')],
-            [gbw.Text('Welke tekst wil je onder Gezinsbond hebben staan onder de QR-Code?')],
-            [gbw.InputText(key='Subtekst')],
-            [gbw.Checkbox(key='geenpopup', text='Geen popup na aanmaken van het bestand', default=False)],
-            [gbw.Button('Ok'), gbw.Button('Sluiten')] ]
+gbw.theme('Black')
 
-# Create the Window
+# Lettertype en grootte
+font_path = 'fonts/SourceSansPro-Bold.ttf'
+font_size = 16
+
+# Gebruik de font tuple in uw layout
+layout = [
+    [gbw.Text('Selecteer de map waar het moet opgeslagen worden', font=(font_path, font_size))],
+    [gbw.In(key='Mapje'), gbw.FolderBrowse()],
+    [gbw.Text('Vul hier de URL in', font=(font_path, font_size))],
+    [gbw.InputText(key='URL')],
+    [gbw.Text('Vul hier de naam van het bestand in (in 1 woord)', font=(font_path, font_size))],
+    [gbw.InputText(key='Bestand')],
+    [gbw.Text('Welke tekst wil je onder Gezinsbond hebben staan onder de QR-Code?', font=(font_path, font_size))],
+    [gbw.InputText(key='Subtekst')],
+    [gbw.Checkbox(key='geenpopup', text='Geen popup na aanmaken van het bestand', default=False, font=(font_path, font_size))],
+    [gbw.Button('Ok', font=(font_path, font_size)), gbw.Button('Sluiten', font=(font_path, font_size))]
+]
+
+# Creëer het hoofdvenster
 window = gbw.Window('QR code generator', layout, grab_anywhere=True)
 # Event Loop to process "events" and get the "values" of the inputs
 while True:
@@ -135,16 +140,15 @@ while True:
     qrtje.paste(gb, posqr)
     frametje.paste(qrtje, posimg)
     frametje.save(bestand)
+    # Vervang tkinter messagebox door PySimpleGUI popup voor consistentie
     if values['geenpopup'] == False:
-        toppie = "Het bestand ", bestand, " is aangemaakt.\nEn opgeslagen in de map c:/pi/gezinsbond\n\nWil je ook nog de QR code zien?"
-        antwoord = messagebox.askyesno(message= toppie, title= "Gelukt")
-        if antwoord == True:
+        message = f"Het bestand {bestand} is aangemaakt.\nEn opgeslagen in de map c:/pi/gezinsbond\n\nWil je ook nog de QR code zien?"
+        antwoord = gbw.popup_yes_no(message, title="Gelukt", font=(font_path, font_size))
+        if antwoord == 'Yes':
             frametje.show()
 #            gb.show()
-            messagebox.CANCEL
         else:
-            messagebox.CANCEL
+            break
     else:
-        messagebox.CANCEL
-
+        break
 window.close()

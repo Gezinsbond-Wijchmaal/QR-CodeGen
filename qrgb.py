@@ -1,32 +1,46 @@
-import PySimpleGUI as gb
+import PySimpleGUI as sg
 import qrcode
 import PIL
-import os
 from PIL import Image, ImageDraw, ImageFont
 from tkinter import messagebox
 import os.path
 
-gb.theme('Black')   # Add a touch of color
-# All the stuff inside your window.
-layout = [  [gb.Text('Selecteer de map waar het moet opgeslagen worden')],
-            [gb.In(key='Mapje'), gb.FolderBrowse()],
-            [gb.Text('Vul hier de URL in')],
-            [gb.InputText(key='URL')],
-            [gb.Text('Vul hier de naam van het bestand in (in 1 woord)')],
-            [gb.InputText(key='Bestand')],
-            [gb.Text('Wat is de naam van de afdeling?')],
-            [gb.InputText(key='Afdeling')],
-            [gb.Text('Welke tekst wil je onder Gezinsbond hebben staan onder de QR-Code?')],
-            [gb.InputText(key='Subtekst')],
-            [gb.Checkbox(key='geenpopup', text='Geen popup na aanmaken van het bestand', default=False)],
-            [gb.Button('Ok'), gb.Button('Sluiten')] ]
+sg.theme('Black')
 
-# Create the Window
-window = gb.Window('QR code generator', layout, grab_anywhere=True)
+# Lettertype en grootte
+font_path = 'fonts/SourceSansPro-Bold.ttf'
+font_size = 16
+
+# Controleer of het lettertype bestaat
+try:
+    font = ImageFont.truetype(font_path, font_size)
+except IOError:
+    messagebox.showerror('Fout', 'Lettertypebestand niet gevonden!')
+    raise SystemExit('Lettertypebestand niet gevonden!')
+
+# Gebruik de font tuple in uw layout
+layout = [
+    [sg.Text('Selecteer de map waar het moet opgeslagen worden', font=(font_path, font_size))],
+    [sg.In(key='Mapje'), sg.FolderBrowse()],
+    [sg.Text('Vul hier de URL in', font=(font_path, font_size))],
+    [sg.InputText(key='URL')],
+    [sg.Text('Vul hier de naam van het bestand in (in 1 woord)', font=(font_path, font_size))],
+    [sg.InputText(key='Bestand')],
+    [sg.Text('Wat is de naam van de afdeling?', font=(font_path, font_size))],
+    [sg.InputText(key='Afdeling')],
+    [sg.Text('Welke tekst wil je onder Gezinsbond hebben staan onder de QR-Code?', font=(font_path, font_size))],
+    [sg.InputText(key='Subtekst')],
+    [sg.Checkbox(key='geenpopup', text='Geen popup na aanmaken van het bestand', default=False, font=(font_path, font_size))],
+    [sg.Button('Ok', font=(font_path, font_size)), sg.Button('Sluiten', font=(font_path, font_size))]
+]
+
+# Creëer het hoofdvenster
+window = sg.Window('QR code generator', layout, grab_anywhere=True)
+
 # Event Loop to process "events" and get the "values" of the inputs
 while True:
     event, values = window.read()
-    if event == gb.WIN_CLOSED or event == 'Sluiten': # if user closes window or clicks cancel
+    if event == sg.WIN_CLOSED or event == 'Sluiten':
         break
     print(values['URL'])
     print(values['Bestand'])
@@ -137,16 +151,13 @@ while True:
     qrtje.paste(gb, posqr)
     frametje.paste(qrtje, posimg)
     frametje.save(bestand)
+    # Vervang tkinter messagebox door PySimpleGUI popup voor consistentie
     if values['geenpopup'] == False:
-        toppie = "Het bestand ", bestand, " is aangemaakt.\nEn opgeslagen in de map c:/pi/gezinsbond\n\nWil je ook nog de QR code zien?"
-        antwoord = messagebox.askyesno(message= toppie, title= "Gelukt")
-        if antwoord == True:
+        message = f"Het bestand {bestand} is aangemaakt.\nEn opgeslagen in de map {mapje}\n\nWil je ook nog de QR code zien?"
+        antwoord = sg.popup_yes_no(message, title="Gelukt", font=(font_path, font_size))
+        if antwoord == 'Yes':
             frametje.show()
 #            gb.show()
-            messagebox.CANCEL
-        else:
-            messagebox.CANCEL
     else:
-        messagebox.CANCEL
-
+        break
 window.close()

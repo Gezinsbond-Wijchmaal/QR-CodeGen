@@ -2,7 +2,29 @@ import PySimpleGUI as sg
 import time
 import threading
 from playsound import playsound
-from PIL import Image
+from PIL import Image, ImageFont
+
+sg.theme('Black')
+
+# Lettertype en grootte
+font_path = 'fonts/SourceSansPro-Bold.ttf'
+font_size = 16
+
+# Controleer of het lettertype bestaat
+try:
+    font = ImageFont.truetype(font_path, font_size)
+except IOError:
+    sg.popup_error('Lettertypebestand niet gevonden!', font=(font_path, font_size))
+    raise SystemExit('Lettertypebestand niet gevonden!')
+
+# Aanpassingen voor timer tekst font
+timer_font = (font_path, 300, 'bold')
+
+# RGB naar hexadecimaal
+def rgb_to_hex(rgb):
+    return '#%02x%02x%02x' % rgb
+
+green_hex = rgb_to_hex((0, 152, 68))
 
 def show_countdown_window(hrs, mins, secs):
     # Afmetingen van de afbeelding bepalen
@@ -29,7 +51,7 @@ def show_countdown_window(hrs, mins, secs):
     graph = window['-GRAPH-']
     graph.draw_image('pics/GB_Transparant.png', location=(0, img_height))
     text_location = (img_width // 2, img_height // 2)
-    font = ('Helvetica', 300, 'bold')
+    font = timer_font
     text_id = graph.draw_text(f'{hrs:02d}:{mins:02d}:{secs:02d}', text_location, font=font, color='#FFFFFF', text_location='center')
 
     return window, text_id
@@ -37,7 +59,7 @@ def show_countdown_window(hrs, mins, secs):
 def countdown_timer(hrs, mins, secs, window, graph, text_id):
     total_seconds = hrs * 3600 + mins * 60 + secs
     img_width, img_height = graph.CanvasSize
-    font = ('Helvetica', 300, 'bold')
+    font = timer_font
 
     while total_seconds > 0:
         time.sleep(1)
@@ -60,13 +82,44 @@ hours = [f'{i:02d}' for i in range(24)]
 minutes = [f'{i:02d}' for i in range(60)]
 seconds = [f'{i:02d}' for i in range(60)]
 
-layout = [
-    [sg.Text('Uren'), sg.Combo(hours, size=(5, 1), key='-HRS-'), sg.Text('Minuten'), sg.Combo(minutes, size=(5, 1), key='-MINS-'), sg.Text('Seconden'), sg.Combo(seconds, size=(5, 1), key='-SECS-')],
-    [sg.Button('Starten'), sg.Button('Sluiten')]
+# Bepaal de breedte van de kolommen
+kolom_breedte = 330
+
+uur_kolom = [
+    [sg.Text('Uren', font=(font_path, font_size), justification='center')],
+    [sg.Combo(hours, size=(15, 1), key='-HRS-', font=(font_path, font_size))]
 ]
 
+minuut_kolom = [
+    [sg.Text('Minuten', font=(font_path, font_size), justification='center')],
+    [sg.Combo(minutes, size=(15, 1), key='-MINS-', font=(font_path, font_size))]
+]
+
+seconde_kolom = [
+    [sg.Text('Seconden', font=(font_path, font_size), justification='center')],
+    [sg.Combo(seconds, size=(15, 1), key='-SECS-', font=(font_path, font_size))]
+]
+
+# Lay-out voor knoppen in een aparte tabel
+knoppen_rij = [
+    [sg.Button('Starten', font=(font_path, font_size), button_color=('white', green_hex)),
+     sg.Push(),
+     sg.Button('Sluiten', font=(font_path, font_size), button_color=('white', green_hex))]
+]
+
+# Volledige lay-out
+layout = [
+    [sg.Column(uur_kolom), sg.Column(minuut_kolom), sg.Column(seconde_kolom)],
+    [sg.Text(' ')],  # Een lege regel voor ruimte
+    knoppen_rij
+]
+
+gewenste_breedte = 670
+gewenste_hoogte = 200
 # Creëer het hoofdvenster
-window = sg.Window('Aftelklok', layout)
+window = sg.Window('Aftelklok', layout, size=(gewenste_breedte, gewenste_hoogte))
+
+
 
 while True:
     event, values = window.read()
