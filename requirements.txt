@@ -1,0 +1,9 @@
+PySimpleGUI
+subprocess
+PIL
+qrcode
+os
+tkinter
+time
+threading
+playsound
