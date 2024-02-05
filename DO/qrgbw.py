@@ -106,7 +106,7 @@ while True:
 
     frametje = frame
 
-    afdeling = ''
+    afdeling = 'Digitaal Ondertekenen'
     print(afdeling)
     
     gbz = Image.open('pics/DO.png').crop(None)
