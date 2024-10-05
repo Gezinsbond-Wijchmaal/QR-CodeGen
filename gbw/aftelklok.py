@@ -28,7 +28,7 @@ create_custom_theme()
 sg.theme('Gezinsbond')
 
 # Lettertype en grootte
-font_path = 'fonts/SourceSansPro-Bold.ttf'
+font_path = 'fonts/sspb.ttf'
 font_size = 16
 
 # Controleer of het lettertype bestaat
@@ -93,7 +93,7 @@ def countdown_timer(hrs, mins, secs, window, graph, text_id):
         text_location = (img_width // 2, img_height // 2)
         text_id = graph.draw_text(f'{hrs:02d}:{mins:02d}:{secs:02d}', text_location, font=font, color='#FFFFFF', text_location='center')
 
-    playsound('sounds/Horn.wav')
+    playsound('sounds/horn.wav')
     window.close()
 
 
