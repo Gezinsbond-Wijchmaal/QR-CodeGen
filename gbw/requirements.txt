@@ -1,6 +1,6 @@
 PySimpleGUI
 subprocess
-PIL
+pillow
 qrcode
 os
 tkinter
