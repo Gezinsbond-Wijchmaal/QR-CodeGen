@@ -1,5 +1,5 @@
 PySimpleGUI
 pillow
 qrcode
-simpleaudio
+pygame
 flask
