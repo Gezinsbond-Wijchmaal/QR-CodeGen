@@ -5,6 +5,9 @@ REM ============================
 REM   Startscript voor QR-CodeGen
 REM ============================
 
+:: Zet titel van venster
+title Gezinsbond Hulptools aangeboden door CyNiT
+
 :: Kleuren
 set "RESET=[0m"
 set "GREEN=[92m"
@@ -12,7 +15,7 @@ set "WHITE=[97m"
 
 :: Brede lijn
 set "LINE=%GREEN%============================================================%RESET%"
-set "TITLE=%WHITE%                 Gezinsbond Hulptools aangeboden door CyNiT%RESET%"
+set "TITLE=%WHITE%------  Gezinsbond Hulptools aangeboden door CyNiT  --------%RESET%"
 
 :: Zoek virtuele omgeving in root of gbw-map
 set VENV_DIR=
