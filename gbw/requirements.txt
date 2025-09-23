@@ -1,5 +1,0 @@
-PySimpleGUI
-pillow
-qrcode
-pygame
-flask

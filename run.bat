@@ -4,7 +4,7 @@ REM Startscript voor QR-CodeGen
 REM ============================
 
 echo Activating virtual environment...
-call venv\Scripts\activate
+call gbw\venv\Scripts\activate.bat
 
 echo Starting main script...
 python gbw\start.py
